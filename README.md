@@ -176,3 +176,4 @@ This website is a modern, static web application ready for instant deployment to
 - **GitHub Pages**: Push this directory to a GitHub repository, go to **Settings > Pages**, and select `main` branch root `/`.
 - **Vercel / Netlify**: Drag-and-drop the directory or connect your git repository. No build command required; publish directory is `./`.
 - **cPanel / Apache / Nginx**: Upload all files to your `public_html` or webroot directory.
+# personal-profile
