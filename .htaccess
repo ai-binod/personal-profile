@@ -1,0 +1,55 @@
+# ====================================================================
+# Binod Sthapit - AI Marketing Portfolio
+# Apache / cPanel Server Configuration (.htaccess)
+# ====================================================================
+
+# 1. Custom 404 Error Page
+ErrorDocument 404 /404.html
+
+# 2. Character Encoding & MIME Types
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddType image/svg+xml .svg .svgz
+  AddType font/woff2 .woff2
+  AddType application/javascript .js
+  AddType text/css .css
+</IfModule>
+
+# 3. Enable URL Rewriting (Clean URLs & extension fallback)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Serve existing files and directories directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Specific blog slug rewrites
+  RewriteRule ^blog/7-ai-tools-every-small-business-owner-should-use-in-2026/?$ article-7-ai-tools-every-small-business-owner-should-use-in-2026.html [L]
+  RewriteRule ^blog/how-to-get-more-customers-from-facebook-and-instagram/?$ article-how-to-get-more-customers-from-facebook-and-instagram.html [L]
+
+  # Allow URLs without .html extension (e.g. /about -> /about.html)
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([^/]+)/?$ $1.html [L]
+</IfModule>
+
+# 4. Browser Caching for Performance
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# 5. Security Headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
